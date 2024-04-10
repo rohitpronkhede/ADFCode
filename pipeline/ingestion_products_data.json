@@ -1,0 +1,73 @@
+{
+	"name": "ingestion_products_data",
+	"properties": {
+		"activities": [
+			{
+				"name": "ingestion_products_data",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select CustomerID,FirstName,LastName,Email,Phone from customers;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "sql_generic_ds",
+						"type": "DatasetReference",
+						"parameters": {
+							"schemaName": "dbo",
+							"tableName": "customers"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "adls_csv_ds",
+						"type": "DatasetReference",
+						"parameters": {
+							"folderPath": {
+								"value": "@concat('Cutsomers/',formatDateTime(utcnow(),'yyyy'),'/',formatDateTime(utcnow(),'MM'))",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-04-03T17:49:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

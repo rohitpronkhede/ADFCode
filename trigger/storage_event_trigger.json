@@ -1,0 +1,26 @@
+{
+	"name": "storage_event_trigger",
+	"properties": {
+		"description": "This trigger executes when a new file arrives in folder",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "copy_pipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/landing/blobs/Product",
+			"blobPathEndsWith": ".txt",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/fbbe4d25-86d5-4f53-97d6-ea8825e8c792/resourceGroups/mission100ade/providers/Microsoft.Storage/storageAccounts/mission100adestorageadls",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"name": "azure_key_vault_ls",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://mission100azurekeyvault.vault.azure.net/"
+		}
+	}
+}

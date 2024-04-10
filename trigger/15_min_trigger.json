@@ -1,0 +1,25 @@
+{
+	"name": "15_min_trigger",
+	"properties": {
+		"description": "This trigger executes the pipeline after each 15 mins.",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "copy_pipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2024-04-07T05:02:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

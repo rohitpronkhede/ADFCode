@@ -1,0 +1,25 @@
+{
+	"name": "daily_trigger",
+	"properties": {
+		"description": "This trigger executes pipeline daily.",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "copy_pipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 2,
+				"startTime": "2024-04-07T04:56:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

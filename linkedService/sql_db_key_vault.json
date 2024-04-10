@@ -1,0 +1,20 @@
+{
+	"name": "sql_db_key_vault",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=missiondatabaseserver.database.windows.net;Initial Catalog=mission100db;User ID=azurerify",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "azure_key_vault_ls",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "databasePassword",
+				"secretVersion": "74bdeb8f012648b988436daad16913f2"
+			}
+		}
+	}
+}

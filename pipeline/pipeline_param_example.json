@@ -1,0 +1,78 @@
+{
+	"name": "pipeline_param_example",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "sql_generic_ds",
+						"type": "DatasetReference",
+						"parameters": {
+							"schemaName": "dbo",
+							"tableName": {
+								"value": "@pipeline().parameters.entityName",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "adls_csv_ds",
+						"type": "DatasetReference",
+						"parameters": {
+							"folderPath": "pipeline_param_example"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"entityName": {
+				"type": "string",
+				"defaultValue": "Products"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-04-06T11:06:02Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

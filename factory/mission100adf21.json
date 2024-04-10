@@ -1,0 +1,20 @@
+{
+	"name": "mission100adf21",
+	"properties": {
+		"globalParameters": {
+			"databaseName": {
+				"type": "string",
+				"value": "mission100db"
+			}
+		},
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "false"
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "afc2592a-3bad-42e7-a9d1-df789d16159d",
+		"tenantId": "3377f7c7-2e59-4ad2-9083-be7626fc4249"
+	}
+}
